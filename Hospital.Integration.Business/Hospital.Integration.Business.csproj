@@ -1,0 +1,83 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+		<CodeAnalysisRuleSet>..\.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Remove="Abstractions\Authentication\**" />
+      <Compile Remove="Abstractions\Billing\**" />
+      <Compile Remove="Abstractions\Care\**" />
+      <Compile Remove="Abstractions\Financial\**" />
+      <Compile Remove="Abstractions\Inventory\**" />
+      <EmbeddedResource Remove="Abstractions\Authentication\**" />
+      <EmbeddedResource Remove="Abstractions\Billing\**" />
+      <EmbeddedResource Remove="Abstractions\Care\**" />
+      <EmbeddedResource Remove="Abstractions\Financial\**" />
+      <EmbeddedResource Remove="Abstractions\Inventory\**" />
+      <None Remove="Abstractions\Authentication\**" />
+      <None Remove="Abstractions\Billing\**" />
+      <None Remove="Abstractions\Care\**" />
+      <None Remove="Abstractions\Financial\**" />
+      <None Remove="Abstractions\Inventory\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Class1.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+      <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.22.0" />
+      <PackageReference Include="Roslynator.Analyzers" Version="4.1.1">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.22.0" />
+    </ItemGroup>
+
+	<ItemGroup>
+		<AdditionalFiles Include="..\stylecop.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="Microsoft.AspNetCore.ResponseCompression" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Abstractions\Data\Financial\" />
+	  <Folder Include="Abstractions\Data\Inventory\" />
+	  <Folder Include="Abstractions\Data\Care\" />
+	  <Folder Include="Abstractions\Data\Billing\" />
+	  <Folder Include="Abstractions\Data\Shared\" />
+	  <Folder Include="Entities\Billing\" />
+	  <Folder Include="Entities\Care\" />
+	  <Folder Include="Entities\Financial\" />
+	  <Folder Include="Entities\Inventory\" />
+	  <Folder Include="Entities\Shared\" />
+	  <Folder Include="Factories\Billing\" />
+	  <Folder Include="Factories\Care\" />
+	  <Folder Include="Factories\Financial\" />
+	  <Folder Include="Factories\Inventory\" />
+	  <Folder Include="Factories\Shared\" />
+	  <Folder Include="Models\Billing\" />
+	  <Folder Include="Models\Care\" />
+	  <Folder Include="Models\Financial\" />
+	  <Folder Include="Models\Inventory\" />
+	  <Folder Include="Models\Shared\" />
+	  <Folder Include="Services\Billing\" />
+	  <Folder Include="Services\Care\" />
+	  <Folder Include="Services\Financial\" />
+	  <Folder Include="Services\Inventory\" />
+	  <Folder Include="Services\Shared\" />
+	</ItemGroup>
+
+</Project>
