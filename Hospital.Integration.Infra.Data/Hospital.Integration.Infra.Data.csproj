@@ -42,7 +42,6 @@
 	  <Folder Include="Repositories\Care\Statements\" />
 	  <Folder Include="Repositories\Financial\Statements\" />
 	  <Folder Include="Repositories\Inventory\Statements\" />
-	  <Folder Include="Repositories\Shared\Statements\" />
 	</ItemGroup>
 
 </Project>
