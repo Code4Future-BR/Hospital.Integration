@@ -3,11 +3,11 @@
 public static class DepartmentStmt
 {
     public const string Create = @"
-        INSERT INTO Department 
+        INSERT INTO [Department] 
         ( 
-            Id,
-            Name,
-            Active                    
+            [Id],
+            [Name],
+            [Active]                    
         )
         VALUES 
         (
@@ -15,4 +15,25 @@ public static class DepartmentStmt
             @Name,
             @Active  
         )";
+
+    public const string SelectById = @"
+        SELECT 
+            [Id],
+            [Name],
+            [Active]
+        FROM [Department] 
+        WHERE 
+            [Id] = @Id";
+
+    public const string SelectByParamns = @"
+        SELECT 
+            [Id],
+            [Name],
+            [Active]
+        FROM [Department]";
+
+    public const string SelectByParamnsCount = @"
+        SELECT 
+            COUNT([Id]
+        FROM [Department]";
 }

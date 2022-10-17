@@ -1,14 +1,14 @@
 ﻿using Dapper;
-using Hospital.Integration.Business.Abstractions.Authentication;
-using Hospital.Integration.Business.Abstractions.Data;
-using Hospital.Integration.Business.Entities;
+using Hospital.Integration.Application.Abstractions.Data;
+using Hospital.Integration.Domain.Security;
 using System.Data;
 
 namespace Hospital.Integration.Infra.Data.Repositories;
 
-internal class UserRepository : IUserRepository
+public class UserRepository : IUserRepository
 {
     private const int MaxTimeOut = 60;
+    private const int IsValid = 1;
     private readonly IUnitOfWork _unitOfWork;
 
     public UserRepository(IUnitOfWork unitOfWork) =>
@@ -24,14 +24,14 @@ internal class UserRepository : IUserRepository
             commandTimeout: MaxTimeOut,
             commandType: CommandType.Text);
 
-    public async Task<bool> ValidateCredentialsAsync(string email, string password) =>
+    public async Task<bool> ValidateCredentialAsync(string email, string password) =>
         await _unitOfWork.Connection.QuerySingleOrDefaultAsync<int>(
-            sql: UserStmt.SelectValidateCredentials,
+            sql: UserStmt.SelectValidateCredential,
             param: new
             {
                 Email = email,
                 Password = password,
             },
             commandTimeout: MaxTimeOut,
-            commandType: CommandType.Text) == 1;
+            commandType: CommandType.Text) == IsValid;
 }

@@ -31,8 +31,8 @@
 
     <ItemGroup>
       <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
-      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
-      <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.22.0" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
+      <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.24.0" />
       <PackageReference Include="Roslynator.Analyzers" Version="4.1.1">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -41,7 +41,7 @@
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
-      <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.22.0" />
+      <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.24.0" />
     </ItemGroup>
 
 	<ItemGroup>
@@ -62,7 +62,7 @@
 	  <Folder Include="Entities\Care\" />
 	  <Folder Include="Entities\Financial\" />
 	  <Folder Include="Entities\Inventory\" />
-	  <Folder Include="Entities\Shared\" />
+	  <Folder Include="Entities\Common\" />
 	  <Folder Include="Factories\Billing\" />
 	  <Folder Include="Factories\Care\" />
 	  <Folder Include="Factories\Financial\" />
@@ -73,10 +73,15 @@
 	  <Folder Include="Models\Financial\" />
 	  <Folder Include="Models\Inventory\" />
 	  <Folder Include="Models\Shared\" />
+	  <Folder Include="Commands\" />
+	  <Folder Include="EventHandlers\" />
+	  <Folder Include="Handlers\" />
+	  <Folder Include="Notifications\" />
 	  <Folder Include="Services\Billing\" />
 	  <Folder Include="Services\Care\" />
 	  <Folder Include="Services\Financial\" />
 	  <Folder Include="Services\Inventory\" />
+	  <Folder Include="Services\Commons\" />
 	  <Folder Include="Services\Shared\" />
 	</ItemGroup>
 

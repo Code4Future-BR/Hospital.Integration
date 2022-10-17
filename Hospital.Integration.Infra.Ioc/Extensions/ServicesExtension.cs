@@ -1,4 +1,5 @@
-﻿using Hospital.Integration.Business.Extensions;
+﻿using Hospital.Integration.Application.Extensions;
+using Hospital.Integration.Business.Extensions;
 using Hospital.Integration.Infra.Data.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,7 +10,8 @@ public static class ServicesExtension
 {
     public static void AddIoc(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddBusiness();
         services.AddData(configuration);
+        services.AddApllication(configuration);
+        // services.AddBusiness();
     }
 }

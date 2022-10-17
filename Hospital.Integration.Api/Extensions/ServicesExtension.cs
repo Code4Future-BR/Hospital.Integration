@@ -1,9 +1,11 @@
 ﻿using Hospital.Integration.Infra.Ioc.Extensions;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.IdentityModel.Tokens;
 using System.IO.Compression;
+using System.Reflection;
 using System.Text;
 
 namespace Hospital.Integration.Api.Extensions;
@@ -19,6 +21,7 @@ public static class ServicesExtension
 
         services.AddCors();
         services.AddControllers();
+        services.AddIoc(configuration);
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
 
@@ -36,7 +39,7 @@ public static class ServicesExtension
             opts.Preload = true;
         });
 
-        services.AddIoc(configuration);
+        
 
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
         {
@@ -47,5 +50,7 @@ public static class ServicesExtension
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"])),
             };
         });
+
+        
     }
 }

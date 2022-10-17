@@ -10,7 +10,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.8" />
+        <PackageReference Include="MediatR" Version="11.0.0" />
+        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.10" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.ResponseCompression" Version="2.2.0" />
@@ -23,11 +25,10 @@
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
-        <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="7.0.4" />
+        <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="7.0.5" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Hospital.Integration.Business\Hospital.Integration.Business.csproj" />
       <ProjectReference Include="..\Hospital.Integration.Infra.Ioc\Hospital.Integration.Infra.Ioc.csproj" />
       <ProjectReference Include="..\Hospital.Integration.Infra.Logger\Hospital.Integration.Infra.Logger.csproj" />
     </ItemGroup>
@@ -54,7 +55,7 @@
 	  <Folder Include="Controllers\Care\" />
 	  <Folder Include="Controllers\Financial\" />
 	  <Folder Include="Controllers\Inventory\" />
-	  <Folder Include="Controllers\Shared\" />
+	  <Folder Include="Controllers\Commons\" />
 	</ItemGroup>
 	
 

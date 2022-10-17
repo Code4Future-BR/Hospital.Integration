@@ -1,5 +1,5 @@
 ﻿using Hospital.Integration.Business.Constants;
-using Hospital.Integration.Business.Entities;
+using Hospital.Integration.Business.Entities.Common;
 using System.Text.Json;
 
 namespace Hospital.Integration.Business.Models;

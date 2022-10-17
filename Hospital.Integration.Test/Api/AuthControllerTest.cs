@@ -1,6 +1,6 @@
 using Hospital.Integration.Api.Controllers;
 using Hospital.Integration.Business.Models;
-using Hospital.Integration.Business.Services.Authentication;
+using Hospital.Integration.Business.Services;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit.Abstractions;

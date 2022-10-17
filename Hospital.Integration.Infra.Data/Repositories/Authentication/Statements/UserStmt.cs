@@ -11,13 +11,13 @@
                 Email,
                 Password,
                 Active
-            FROM [User]
+            FROM [User] NOLOCK
             WHERE
                 Email = @Email";
 
-        public const string SelectValidateCredentials = @"
+        public const string SelectValidateCredential = @"
                 SELECT TOP 1 CONVERT(INT, 1)
-                FROM [User]
+                FROM [User] NOLOCK
                 WHERE
                     Email = @Email
                     AND Password = @Password";

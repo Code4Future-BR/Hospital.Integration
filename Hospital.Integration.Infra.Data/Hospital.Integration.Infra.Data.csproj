@@ -19,7 +19,7 @@
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
-      <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+      <PackageReference Include="System.Data.SqlClient" Version="4.8.4" />
     </ItemGroup>
 
 	<ItemGroup>
@@ -33,7 +33,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\Hospital.Integration.Application\Hospital.Integration.Application.csproj" />
 	  <ProjectReference Include="..\Hospital.Integration.Business\Hospital.Integration.Business.csproj" />
+	  <ProjectReference Include="..\Hospital.Integration.Domain\Hospital.Integration.Domain.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

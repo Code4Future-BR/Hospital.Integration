@@ -1,6 +1,6 @@
-﻿namespace Hospital.Integration.Business.Entities;
+﻿namespace Hospital.Integration.Business.Entities.Common;
 
-public record Department
+public class Department
 {
     public string? Id { get; init; }
     public string? Name { get; init; }

@@ -1,13 +1,5 @@
 using Hospital.Integration.Api.Extensions;
-using Hospital.Integration.Business.Extensions;
-using Hospital.Integration.Infra.Data.Extensions;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.AspNetCore.ResponseCompression;
-using Microsoft.IdentityModel.Tokens;
-using System.IO.Compression;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 

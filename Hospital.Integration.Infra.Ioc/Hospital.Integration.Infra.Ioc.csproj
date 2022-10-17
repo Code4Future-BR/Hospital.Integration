@@ -19,6 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Hospital.Integration.Application\Hospital.Integration.Application.csproj" />
       <ProjectReference Include="..\Hospital.Integration.Business\Hospital.Integration.Business.csproj" />
       <ProjectReference Include="..\Hospital.Integration.Infra.Data\Hospital.Integration.Infra.Data.csproj" />
       <ProjectReference Include="..\Hospital.Integration.Infra.Logger\Hospital.Integration.Infra.Logger.csproj" />

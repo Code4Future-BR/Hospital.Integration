@@ -1,4 +1,4 @@
-﻿using Hospital.Integration.Business.Entities;
+﻿using Hospital.Integration.Business.Entities.Common;
 using Hospital.Integration.Business.Models;
 
 namespace Hospital.Integration.Business.Abstractions.Data;

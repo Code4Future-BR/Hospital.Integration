@@ -1,36 +1,38 @@
-﻿using Hospital.Integration.Business.Constants;
-using Hospital.Integration.Business.Models;
-using Hospital.Integration.Business.Services;
+﻿using Hospital.Integration.Api.Factories.Security;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hospital.Integration.Api.Controllers;
 
-[ApiVersion("1.0")]
 [Route("api/[controller]")]
 [ApiController]
 public class AuthController : ControllerBase
 {
-    private readonly IAuthService _authService;
+    private readonly IMediator _mediator;
 
     public AuthController(
-        IAuthService authService) =>
-        _authService = authService ?? throw new ArgumentNullException(nameof(authService));
+        IMediator mediator) =>
+        _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
     [ProducesDefaultResponseType]
-    public async Task<IActionResult> Post(string email, string password) =>
-        await Task.FromResult(MountResult(await _authService.GenerateToken(email, password)));
-
-    private IActionResult MountResult(AuthResponse response) => response.ResponseCode switch
+    public async Task<IActionResult> Post(string request)
     {
-        ResponseCodes.Success => Ok(response),
-        ResponseCodes.Unauthorized => StatusCode(StatusCodes.Status401Unauthorized),
-        ResponseCodes.ErrorTryAgain => StatusCode(StatusCodes.Status500InternalServerError),
-        ResponseCodes.ServiceUnavailable => StatusCode(StatusCodes.Status503ServiceUnavailable),
-        _ => BadRequest(response),
-    };
+        var requestModel = AuthFactory.FromPost(request);
+        if (requestModel == null)
+        {
+            return await Task.FromResult(StatusCode(StatusCodes.Status401Unauthorized));
+        }
+
+        var newToken = await _mediator.Send(requestModel);
+
+        if (newToken is null)
+        {
+            return await Task.FromResult(StatusCode(StatusCodes.Status401Unauthorized));
+        }
+
+        return await Task.FromResult(Ok(newToken));
+    }
 }

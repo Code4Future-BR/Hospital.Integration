@@ -1,5 +1,4 @@
-using Hospital.Integration.Business.Abstractions.Authentication;
-using Hospital.Integration.Business.Abstractions.Data;
+using Hospital.Integration.Application.Abstractions.Data;
 using Hospital.Integration.Infra.Data.Configuration;
 using Hospital.Integration.Infra.Data.Context;
 using Hospital.Integration.Infra.Data.Repositories;
@@ -39,6 +38,7 @@ public static class ServicesExtension
 
         services.AddScoped<IConnectionFactory, ConnectionFactory>();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IDepartmentRepository, DepartmentRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 }

@@ -1,6 +1,5 @@
+using Hospital.Integration.Application.Abstractions.Data;
 using System.Data;
-using Hospital.Integration.Business.Abstractions.Data;
-//using Microsoft.Extensions.Logging;
 
 namespace Hospital.Integration.Infra.Data.Context;
 
