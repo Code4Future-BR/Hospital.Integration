@@ -1,7 +1,5 @@
 ﻿using Hospital.Integration.Api.Factories;
 using Hospital.Integration.Api.Factory.Common;
-using Hospital.Integration.Application.Models;
-using Hospital.Integration.Business.Constants;
 using Hospital.Integration.Business.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -20,50 +18,16 @@ public class DepartmentsController : ControllerBase
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
     }
 
-    [HttpGet("{request}", Name = nameof(DepartmentsByIdAsync))]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
-    [ProducesDefaultResponseType]
-    public async Task<IActionResult> DepartmentsByIdAsync(string request)
-    {
-        if (!Guid.TryParse(request, out _))
-        {
-            return await Task.FromResult(BadRequest("Invalid Id"));
-        }
-
-        var requestModel = RequestFactory.From(request);
-        var department = await _mediator.Send(requestModel);
-
-        if (department is null)
-        {
-            return await Task.FromResult(NotFound());
-        }
-
-        return await Task.FromResult(Ok(department));
-    }
-
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
     [ProducesDefaultResponseType]
     public async Task<IActionResult> DepartmentsByParamAsync(string request)
     {
-        var requestModel = RequestFactory.From(request);
-        var departmentsQuery = DepartmentFactory.FromGet(requestModel);
-
-        if (departmentsQuery is null)
-        {
-            return await Task.FromResult(NotFound());
-        }
+        var departmentsQuery = DepartmentFactory.FromGet(request);
 
         var departments = await _mediator.Send(departmentsQuery);
-        return await Task.FromResult(MountResult(departments));
+        return await Task.FromResult(Ok(departments));
     }
 
     [HttpPost]
@@ -83,10 +47,7 @@ public class DepartmentsController : ControllerBase
         }
 
         var id = await _mediator.Send(departmentCreateCommand);
-        return await Task.FromResult(CreatedAtRoute(
-         routeName: nameof(DepartmentsByIdAsync),
-         routeValues: new { id },
-         value: request));
+        return await Task.FromResult(Created(string.Empty, id));
     }
 
     [HttpPut]
@@ -106,18 +67,6 @@ public class DepartmentsController : ControllerBase
         }
 
         var id = await _mediator.Send(departmentUpdateCommand);
-        return await Task.FromResult(CreatedAtRoute(
-         routeName: nameof(DepartmentsByIdAsync),
-         routeValues: new { id },
-         value: request));
+        return await Task.FromResult(Created(string.Empty, id));
     }
-
-    private IActionResult MountResult(ListResponse response) => response.ResponseCode switch
-    {
-        ResponseCodes.Success => Ok(response),
-        ResponseCodes.Nonexistent => BadRequest(response),
-        ResponseCodes.ErrorTryAgain => StatusCode(StatusCodes.Status500InternalServerError),
-        ResponseCodes.ServiceUnavailable => StatusCode(StatusCodes.Status503ServiceUnavailable),
-        _ => BadRequest(response),
-    };
 }

@@ -16,8 +16,11 @@ public static class ServicesExtension
 
     public static void AddMediatRApi(this IServiceCollection services)
     {
-        // services.AddMediatR(typeof(DepartmentByIdQuery));
-        // services.AddMediatR(typeof(DepartmentsQuery));
+        services.AddMediatR(typeof(AccommodationsQuery));
+        services.AddMediatR(typeof(AccommodationCategoriesQuery));
+        services.AddMediatR(typeof(ProfessionalsQuery));
+        services.AddMediatR(typeof(DepartmentsQuery));
+        services.AddMediatR(typeof(PatientsQueryHandler));
         services.AddMediatR(typeof(UserValidateCredentialQuery));
     }
 }

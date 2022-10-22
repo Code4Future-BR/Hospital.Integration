@@ -1,22 +1,22 @@
 ﻿using Hospital.Integration.Application.Abstractions.Data;
 using Hospital.Integration.Application.Factories.Common;
 using Hospital.Integration.Application.Models;
-using Hospital.Integration.Domain.Commons;
+using Hospital.Integration.Domain;
 using MediatR;
 
 namespace Hospital.Integration.Application.QueriesHandlers.Common;
 
 public class DepartmentsQuery : IRequest<ListResponse>
 {
-    public string Id { get; init; }
+    public string? Id { get; init; }
 
-    public string Name { get; init; }
+    public string? Name { get; init; }
 
-    public bool Active { get; init; }
+    public bool? Active { get; init; }
 
     public FilterPaging? FilterPaging { get; init; }
 
-    public Request? Request { get; init; }
+    public Request Request { get; init; }
 }
 
 public class DepartmentsQueryHandler : IRequestHandler<DepartmentsQuery, ListResponse>
@@ -29,13 +29,10 @@ public class DepartmentsQueryHandler : IRequestHandler<DepartmentsQuery, ListRes
 
     public async Task<ListResponse> Handle(DepartmentsQuery departmentsQuery, CancellationToken cancellationToken)
     {
-        var department = new Department(departmentsQuery.Id, departmentsQuery.Name, departmentsQuery.Active);
+        var totalCount = await _departmentRepository.GetByParamnsCountAsync(departmentsQuery);
 
-        var totalCount = await _departmentRepository.GetByParamnsCountAsync(department);
-
-        var departments = await _departmentRepository.GetByParamnsAsync(department, departmentsQuery.FilterPaging);
+        var departments = await _departmentRepository.GetByParamnsAsync(departmentsQuery);
 
         return DepartmentFactory.ToGet(departmentsQuery.Request, totalCount, departments);
     }
-
 }

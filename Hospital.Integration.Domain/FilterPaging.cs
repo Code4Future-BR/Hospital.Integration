@@ -1,4 +1,4 @@
-﻿namespace Hospital.Integration.Domain.Commons;
+﻿namespace Hospital.Integration.Domain;
 
 public record FilterPaging
 {

@@ -1,6 +1,8 @@
-﻿using Hospital.Integration.Application.Handlers.Common;
+﻿using Hospital.Integration.Api.Factories;
+using Hospital.Integration.Application.Handlers.Common;
 using Hospital.Integration.Application.Models;
 using Hospital.Integration.Application.QueriesHandlers.Common;
+using Hospital.Integration.Application.QueriesHandlers.Security;
 using Hospital.Integration.Domain.Commons;
 using System.Text.Json;
 
@@ -52,27 +54,23 @@ public static class DepartmentFactory
             };
     }
 
-    public static DepartmentsQuery FromGet(Request request)
+    public static DepartmentsQuery? FromGet(string request)
     {
-        if (string.IsNullOrEmpty(request.ModelBase64) || request.ModelBase64 == "{}")
+        var requestModel = RequestFactory.From(request);
+        var filtro = JsonSerializer.Deserialize<DepartmentsQuery>(requestModel.ModelBase64 ?? string.Empty);
+
+        return new()
         {
-            return
-                new()
-                {
-                    Id = string.Empty,
-                    Name = string.Empty,
-                    Active = false,
-                };
-        }
-
-        var model = JsonSerializer.Deserialize<Department>(request.ModelBase64);
-
-        return
-            new()
+            Id = filtro?.Id ?? string.Empty,
+            Name = filtro?.Name ?? string.Empty,
+            Active = filtro?.Active ?? null,
+            FilterPaging = new()
             {
-                Id = model?.Id,
-                Name = model?.Name,
-                Active = model.Active,
-            };
+                Skip = requestModel.Skip,
+                Sort = requestModel.Sort,
+                Take = requestModel.Take,
+            },
+            Request = requestModel,
+        };
     }
 }

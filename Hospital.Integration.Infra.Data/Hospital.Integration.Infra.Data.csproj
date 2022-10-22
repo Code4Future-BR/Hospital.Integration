@@ -41,7 +41,6 @@
 	<ItemGroup>
 	  <Folder Include="Repositories\Authentication\" />
 	  <Folder Include="Repositories\Billing\Statements\" />
-	  <Folder Include="Repositories\Care\Statements\" />
 	  <Folder Include="Repositories\Financial\Statements\" />
 	  <Folder Include="Repositories\Inventory\Statements\" />
 	</ItemGroup>

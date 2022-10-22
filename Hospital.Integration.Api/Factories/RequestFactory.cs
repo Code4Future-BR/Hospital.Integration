@@ -21,18 +21,7 @@ public static class RequestFactory
                 Skip = requestModel?.Skip,
                 Take = requestModel?.Take,
                 DateNow = DateTimeOffset.Now,
-                ModelBase64 = requestModel?.ModelBase64,
+                ModelBase64 = requestModel?.ModelBase64 ?? null,
             };
     }
-
-    //public static FilterPaging FilterFrom(Request request)
-    //{
-    //    return
-    //        new()
-    //        {
-    //            Sort = request.Sort,
-    //            Skip = request.Skip,
-    //            Take = request.Take,
-    //        };
-    //}
 }

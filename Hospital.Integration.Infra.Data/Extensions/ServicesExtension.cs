@@ -38,7 +38,12 @@ public static class ServicesExtension
 
         services.AddScoped<IConnectionFactory, ConnectionFactory>();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IAccommodationCategoryRepository, AccommodationCategoryRepository>();
+        services.AddScoped<IAccommodationRepository, AccommodationRepository>();
+        services.AddScoped<IProfessionalRepository, ProfessionalRepository>();
         services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+        services.AddScoped<IPatientRepository, PatientRepository>();
+
         services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 }

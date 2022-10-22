@@ -1,4 +1,5 @@
 ﻿
+using Hospital.Integration.Application.QueriesHandlers.Common;
 using Hospital.Integration.Domain.Commons;
 
 namespace Hospital.Integration.Application.Abstractions.Data;
@@ -7,9 +8,9 @@ public interface IDepartmentRepository
 {
     Task<Department> GetByIdAsync(string id);
 
-    Task<int> GetByParamnsCountAsync(Department department);
+    Task<int> GetByParamnsCountAsync(DepartmentsQuery departmentQuery);
 
-    Task<IEnumerable<Department>> GetByParamnsAsync(Department department, FilterPaging filterPaging);
+    Task<IEnumerable<Department>> GetByParamnsAsync(DepartmentsQuery departmentQuery);
 
     Task<string> CreateAsync(Department department);
 

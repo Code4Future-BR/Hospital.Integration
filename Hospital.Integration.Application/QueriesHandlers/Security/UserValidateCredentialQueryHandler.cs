@@ -19,11 +19,13 @@ public class UserValidateCredentialQuery : IRequest<UserValidateCredentialQueryR
 
 public class UserValidateCredentialQueryResult
 {
-    public string? AccessToken { get; init; }
+    public string Name { get; init; } = string.Empty;
 
-    public string? TokenType { get; init; }
+    public string AccessToken { get; init; } = string.Empty;
 
-    public string? ExpiresIn { get; init; }
+    public string TokenType { get; init; } = string.Empty;
+
+    public string ExpiresIn { get; init; } = string.Empty;
 }
 
 public class UserValidateCredentialQueryHandler : IRequestHandler<UserValidateCredentialQuery, UserValidateCredentialQueryResult?>
@@ -83,6 +85,7 @@ public class UserValidateCredentialQueryHandler : IRequestHandler<UserValidateCr
 
         return new UserValidateCredentialQueryResult
         {
+            Name = $"{user.FirstName} {user.LastName}" ?? string.Empty,
             AccessToken = jwtToken,
             TokenType = TokenType,
             ExpiresIn = expires.Subtract(issuedAt).TotalSeconds.ToString(CultureInfo.InvariantCulture),

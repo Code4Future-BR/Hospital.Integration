@@ -34,6 +34,6 @@ public static class DepartmentStmt
 
     public const string SelectByParamnsCount = @"
         SELECT 
-            COUNT([Id]
+            COUNT([Id])
         FROM [Department]";
 }

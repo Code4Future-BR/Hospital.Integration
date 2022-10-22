@@ -1,5 +1,7 @@
 ﻿using Dapper;
 using Hospital.Integration.Application.Abstractions.Data;
+using Hospital.Integration.Application.QueriesHandlers.Common;
+using Hospital.Integration.Domain;
 using Hospital.Integration.Domain.Commons;
 using Hospital.Integration.Infra.Data.Repositories.Shared.Statements;
 using System.Data;
@@ -43,25 +45,23 @@ public class DepartmentRepository : IDepartmentRepository
            commandTimeout: MaxTimeOut,
            commandType: CommandType.Text);
 
-    public async Task<IEnumerable<Department>> GetByParamnsAsync(Department department, FilterPaging filterPaging)
+    public async Task<IEnumerable<Department>> GetByParamnsAsync(DepartmentsQuery departmentquery)
     {
-        var (query, paramFilter) = MountFilter(DepartmentStmt.SelectByParamns, department, filterPaging);
+        var (query, paramFilter) = MountFilter(DepartmentStmt.SelectByParamns, departmentquery, departmentquery.FilterPaging);
 
         return await _unitOfWork.Connection.QueryAsync<Department>(
             sql: query,
             param: paramFilter,
-            transaction: _unitOfWork.Transaction,
             commandTimeout: MaxTimeOut,
             commandType: CommandType.Text);
     }
 
-    public async Task<int> GetByParamnsCountAsync(Department department)
+    public async Task<int> GetByParamnsCountAsync(DepartmentsQuery departmentquery)
     {
-        var (query, paramFilter) = MountFilter(DepartmentStmt.SelectByParamnsCount, department);
+        var (query, paramFilter) = MountFilter(DepartmentStmt.SelectByParamnsCount, departmentquery);
         return await _unitOfWork.Connection.QuerySingleAsync<int>(
             sql: query,
             param: paramFilter,
-            transaction: _unitOfWork.Transaction,
             commandTimeout: MaxTimeOut,
             commandType: CommandType.Text);
     }
@@ -71,7 +71,7 @@ public class DepartmentRepository : IDepartmentRepository
         throw new NotImplementedException();
     }
 
-    private static (string, DynamicParameters) MountFilter(string select, Department filter, FilterPaging? filterPaging = null)
+    private static (string, DynamicParameters) MountFilter(string select, DepartmentsQuery filter, FilterPaging? filterPaging = null)
     {
         var query = new StringBuilder(select);
 

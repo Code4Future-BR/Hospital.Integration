@@ -39,8 +39,6 @@ public static class ServicesExtension
             opts.Preload = true;
         });
 
-        
-
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
         {
             opt.TokenValidationParameters = new()

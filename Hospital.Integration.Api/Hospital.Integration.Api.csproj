@@ -52,10 +52,8 @@
 
 	<ItemGroup>
 	  <Folder Include="Controllers\Billing\" />
-	  <Folder Include="Controllers\Care\" />
 	  <Folder Include="Controllers\Financial\" />
 	  <Folder Include="Controllers\Inventory\" />
-	  <Folder Include="Controllers\Commons\" />
 	</ItemGroup>
 	
 

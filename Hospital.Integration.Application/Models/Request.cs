@@ -2,7 +2,7 @@
 
 namespace Hospital.Integration.Application.Models;
 
-public class Request
+public record Request
 {
     public string? Id { get; init; }
 
