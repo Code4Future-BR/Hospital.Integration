@@ -47,10 +47,10 @@ public class DepartmentCreateCommandHandler : IRequestHandler<DepartmentCreateCo
 
     //}
 
-    public async Task<string> Handle(DepartmentCreateCommand createDepartmentCommand, CancellationToken cancellationToken)
+    public async Task<string> Handle(DepartmentCreateCommand departmentCreateCommand, CancellationToken cancellationToken)
     {
         _uow.BeginTransaction();
-        var department = DepartmentFactory.FromCreate(createDepartmentCommand);
+        var department = DepartmentFactory.FromCreate(departmentCreateCommand);
         var id = await _departmentRepository.CreateAsync(department);
         _uow.Commit();
 

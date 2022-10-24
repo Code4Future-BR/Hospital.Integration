@@ -2,7 +2,6 @@
 using Hospital.Integration.Application.Handlers.Common;
 using Hospital.Integration.Application.Models;
 using Hospital.Integration.Application.QueriesHandlers.Common;
-using Hospital.Integration.Application.QueriesHandlers.Security;
 using Hospital.Integration.Domain.Commons;
 using System.Text.Json;
 
@@ -10,26 +9,10 @@ namespace Hospital.Integration.Api.Factory.Common;
 
 public static class DepartmentFactory
 {
-    public static DepartmentUpdateCommand? FromCreate(Request request)
+    public static DepartmentCreateCommand? FromCreate(string request)
     {
-        if (string.IsNullOrEmpty(request.ModelBase64) || request.ModelBase64 == "{}")
-        {
-            return null;
-        }
-
-        var model = JsonSerializer.Deserialize<DepartmentUpdateCommand>(request.ModelBase64);
-
-        if (model is null)
-        {
-            return null;
-        }
-
-        return
-            new()
-            {
-                Name = model.Name,
-                Active = model.Active,
-            };
+        var requestModel = RequestFactory.From(request);
+        return JsonSerializer.Deserialize<DepartmentCreateCommand>(requestModel.ModelBase64 ?? string.Empty);
     }
 
     public static DepartmentCreateCommand? FromUpdate(Request request)

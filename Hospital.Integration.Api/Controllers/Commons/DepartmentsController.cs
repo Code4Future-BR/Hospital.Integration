@@ -38,8 +38,7 @@ public class DepartmentsController : ControllerBase
     [ProducesDefaultResponseType]
     public async Task<IActionResult> DepartmentCreateAsync(string request)
     {
-        var requestModel = RequestFactory.From(request);
-        var departmentCreateCommand = DepartmentFactory.FromCreate(requestModel);
+        var departmentCreateCommand = DepartmentFactory.FromCreate(request);
 
         if (departmentCreateCommand is null)
         {
